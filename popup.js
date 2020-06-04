@@ -3,11 +3,13 @@
 // once 25 minutes is hit block all socials - /facebook/twitter/instagram/netflix
 // stop button
 
+
+
 let min = 25
 let ten = 0
 let seconds = 0
 
-let time = document.querySelector('.container')
+const time = document.querySelector('.container')
 time.textContent = min + ":" + ten + seconds 
 
 let twofiveactive;
@@ -44,7 +46,6 @@ function starttwentyfive() {
         if (!twofiveactive) {
             clearInterval(foo)
         }
-      
       }, 1000)
     }
 }
@@ -88,8 +89,36 @@ function stop() {
 function resume() {
   twofiveactive = true;
   fiveactive = true;
+  const foo = setInterval(function() {    
+    if (ten === 0 && seconds === 0 ){
+        ten = 5
+        min = min - 1
+        seconds = 9;
+    }
+    else if (seconds === 0){
+        ten = ten - 1
+        seconds = 9
+    } 
+    else {
+        seconds = seconds - 1
+    }
+    time.textContent = min + ":" + ten + seconds 
+    if (min === 0 && ten === 0 && seconds === 0){
+        min = 0;
+        ten = 0;
+        seconds = 0;
+        time.textContent = min + ":" + ten + seconds 
+        clearInterval(foo);
+    }
+    if (!twofiveactive || !fiveactive) {
+        clearInterval(foo)
+    }
+  }, 1000)
 }
 
 document.getElementById('start-25').addEventListener('click', starttwentyfive);
 document.getElementById('break-5').addEventListener('click', startWith5);
 document.getElementById('stop').addEventListener('click', stop);
+document.getElementById('resume').addEventListener('click', resume);
+
+chrome.browserAction.setBadgeText({text: 'your text'});
