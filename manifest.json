@@ -1,0 +1,14 @@
+  
+{
+  "manifest_version": 2,
+
+  "name": "Test",
+  "description": "Test",
+  "version": "1.0.0",
+  "icons": { "128": "./images/get_started128.png" },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["activeTab"]
+}
+
