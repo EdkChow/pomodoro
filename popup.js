@@ -4,13 +4,12 @@
 // stop button
 
 
+let min = 25;
+let ten = 0;
+let seconds = 0;
 
-let min = 25
-let ten = 0
-let seconds = 0
-
-const time = document.querySelector('.container')
-time.textContent = min + ":" + ten + seconds 
+const time = document.querySelector('.container');
+time.textContent = min + ":" + ten + seconds;
 
 let twofiveactive;
 let fiveactive;
@@ -22,7 +21,12 @@ function starttwentyfive() {
     ten = 0
     seconds = 0
     if (twofiveactive) {
-      const foo = setInterval(function() {    
+      const foo = setInterval(function() {
+
+        
+        // if (localStorage.getItem('min') !== null && localStorage.getItem('min') !== undefined) min = localStorage.getItem('min');
+        // // localStorage.clear();
+
         if (ten === 0 && seconds === 0 ){
             ten = 5
             min = min - 1
@@ -46,8 +50,10 @@ function starttwentyfive() {
         if (!twofiveactive) {
             clearInterval(foo)
         }
+        // localStorage.setItem('min', min);
       }, 1000)
     }
+    
 }
 
 function startWith5() {
@@ -77,6 +83,7 @@ function startWith5() {
           clearInterval(foo);
       }
       if (!fiveactive) clearInterval(foo)
+      
     }, 1000)
   }
 }
@@ -116,9 +123,11 @@ function resume() {
   }, 1000)
 }
 
+
+
 document.getElementById('start-25').addEventListener('click', starttwentyfive);
 document.getElementById('break-5').addEventListener('click', startWith5);
 document.getElementById('stop').addEventListener('click', stop);
 document.getElementById('resume').addEventListener('click', resume);
 
-chrome.browserAction.setBadgeText({text: 'your text'});
+// chrome.browserAction.setBadgeText({text: min + ':' + ten + seconds});
